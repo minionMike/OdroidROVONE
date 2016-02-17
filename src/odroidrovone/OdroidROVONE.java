@@ -6,6 +6,11 @@
 package odroidrovone;
 import org.opencv.core.Core;
 
+import java.io.*;
+import java.net.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Morten
@@ -19,7 +24,20 @@ public class OdroidROVONE {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         ImageViewer v = new ImageViewer();
         UVC c = new UVC();
+        c.openCam();
         v.show(c.getNextFrame());
+        
+        InetAddress IPAddress;
+        try {
+            IPAddress = InetAddress.getByName("localhost");
+            System.out.println(IPAddress);
+            
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(OdroidROVONE.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
     }
     
 }
